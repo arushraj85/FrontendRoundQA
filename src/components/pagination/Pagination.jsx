@@ -18,8 +18,13 @@ function Pagination() {
   }, []);
 
   const selectPageHandler = (selectedPage) => {
-    if (selectedPage >= 1 && selectedPage <= products.length / 4)
-      setPage(selectedPage);
+    // if (selectedPage >= 1 && selectedPage <= products.length / 4)
+    //   setPage(selectedPage);
+    if (selectedPage < 1) {
+      setPage(products.length / 4);
+    } else if (selectedPage > products.length / 4) {
+      setPage(1);
+    } else setPage(selectedPage);
   };
 
   return (
@@ -44,7 +49,7 @@ function Pagination() {
       {products.length > 0 && (
         <div className="pagination">
           <span
-            className={page === 1 ? "pagination__disable" : ""}
+            // className={page === 1 ? "pagination__disable" : ""}
             onClick={() => selectPageHandler(page - 1)}
           >
             Prev
@@ -61,9 +66,9 @@ function Pagination() {
             );
           })}
           <span
-            className={
-              page === products.length / 4 ? "pagination__disable" : ""
-            }
+            // className={
+            //   page === products.length / 4 ? "pagination__disable" : ""
+            // }
             onClick={() => selectPageHandler(page + 1)}
           >
             Next
